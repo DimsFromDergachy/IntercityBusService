@@ -20,7 +20,7 @@ namespace IntercityBusService.Data
                     Role = Role.Administrator,
                 },
             };
-            context.AddRange(users);
+            context.Users.AddRange(users);
             context.SaveChanges();
         }
 
