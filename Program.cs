@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+
+using IntercityBusService.Data;
 
 namespace IntercityBusService
 {
@@ -14,7 +17,23 @@ namespace IntercityBusService
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            IWebHost host = BuildWebHost(args);
+
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<DatabaseContext>();
+                    DbInitializer.Initialize(context);
+                }
+                catch (Exception ex)
+                {
+                    // TODO: Log exception
+                }
+            }
+
+            host.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
