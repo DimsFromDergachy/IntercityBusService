@@ -1,9 +1,11 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IntercityBusService.Models
 {
     public class Ticket
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
         public User Passenger { get; set; }
         public Ride Ride { get; set; }
