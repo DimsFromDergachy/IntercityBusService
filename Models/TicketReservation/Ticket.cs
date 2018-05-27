@@ -3,6 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IntercityBusService.Models
 {
+    public enum RideStatus
+    {
+        Success,
+        Paid,
+        Canceled,
+        Missed,
+    }
+
     public class Ticket
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

@@ -2,6 +2,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IntercityBusService.Models
 {
+    public enum Role
+    {
+        Administrator,
+        Manager,
+        Driver,
+        Passenger,
+        Guest,
+    }
+
     public class User
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
